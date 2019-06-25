@@ -1,4 +1,31 @@
 <div class="container">
+    <div class="modal fade" id="postForm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Create a Post</h4>
+      </div>
+      <div class="modal-body mx-3">
+          <form action="/createpost" method="post">
+            <div class="form-group">
+              <h3 style="font-family: 'Lobster', cursive;">Post Caption</h3>
+              <input type="text" name="caption" class="form-control" id="PostCaption" placeholder="Daddy's Lil Gal">
+            </div>
+            <h3 style="font-family: 'Lobster', cursive;">Post Image</h3>
+            <div class="input-group mb-3">
+            
+            <div class="custom-file">
+             
+              <input type="file" name="image" accept=".png, .jpg, .jpeg" class="custom-file-input" id="inputGroupFile01" >
+               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
     <div class="row">
         <div class="col-lg-3">
            <h1 class="mt-4">Dashboard</h1>
@@ -9,7 +36,7 @@
             Posts
         </div>
         <div class="col-lg-3">
-            Profile
+            <button class="btn btn-info mt-3" data-toggle="modal" data-target="#postForm" onclick="console.log('POST Button')">New Post</button>
         </div>
     </div>
 </div>

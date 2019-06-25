@@ -1,12 +1,45 @@
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require('../config/auth');
+const { ensureAuthenticated } = require("../config/auth");
+const Post = require("../models/Post");
+var fs = require("fs");
+router.get("/dashboard", ensureAuthenticated, (req, res) => {
+  // Ideal is the '_id' of user to whom i follow
+  //   const ideals = req.user.ideals;
+  //   const posts = [];
+  //   ideals.forEach(function(ideal) {
+  //     Post.find({ userid: ideal }).then((post)=>console.log(post));
+  //   });
+  res.render("dashboard", {
+    user: req.user
+  });
+});
 
-router.get('/dashboard',ensureAuthenticated,(req,res)=>{
-    // Fetch username from req and then get posts from db and pass its array to dashboard ejs
-    res.render('dashboard',{
-        user: req.user
-      })
-})
+router.post("/post/create", ensureAuthenticated, (req, res) => {
+  const { caption, image } = req.body;
+  console.log(image);
+  var newPost = new Post();
+  newPost.caption = caption;
+  newPost.image.data = fs.readFileSync(image);
+  newPost.image.contentType =
+    "image/" + image.slice(image.length - 3, image.length);
+  newPost.userid = req.user._id;
+  console.log(newPost);
+  newPost
+    .save()
+    .then(post => {
+      console.log("New Post Added");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  res.redirect("/dashboard");
+});
 
-module.exports=router;
+router.post("/post/like", (req, res) => {});
+
+router.post("/post/comment", (req, res) => {});
+
+router.post("/post/delete", (req, res) => {});
+
+module.exports = router;

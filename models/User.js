@@ -19,6 +19,12 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    ideals:{
+        type:Array
+    },
+    followers:{
+        type:Array
+    }
 });
 
 
