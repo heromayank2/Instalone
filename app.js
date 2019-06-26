@@ -50,4 +50,5 @@ app.get('/',(req,res)=>{
 })
 app.use('/',require('./routes/user'));
 app.use('/',require('./routes/dashboard'))
+app.use("/", express.static(__dirname + '/assets/'));
 app.listen(PORT,console.log("Listening on PORT "+PORT));

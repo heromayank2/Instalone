@@ -40,7 +40,9 @@ router.post("/post/create", ensureAuthenticated, (req, res) => {
   res.redirect("/dashboard");
 });
 
-router.post("/post/like", (req, res) => {});
+router.post("/post/like", (req, res) => {
+  
+});
 
 router.post("/post/comment", (req, res) => {});
 

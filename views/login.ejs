@@ -1,7 +1,9 @@
-<div class="row mt-5 p-3">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1>
+<div class="container">
+<div class="row mt-5 p-2" >
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="card card-body" style="background:#ffffff44">
+      <h1 class="text-center mb-3" style="font-family: 'Satisfy', cursive;">Welcome! Login Here</h1>
       <form action="/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
@@ -11,6 +13,7 @@
             name="email"
             class="form-control"
             placeholder="Enter Email"
+            style="background:#ffffff88"
           />
         </div>
         <div class="form-group">
@@ -21,13 +24,15 @@
             name="password"
             class="form-control"
             placeholder="Enter Password"
+            style="background:#ffffff88"
           />
         </div>
         <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>
-      <p class="lead mt-4">
+      <p class="lead mt-4" style="font-family: 'Satisfy', cursive;">
         No Account? <a href="/register">Register</a>
       </p>
     </div>
   </div>
+</div>
 </div>
