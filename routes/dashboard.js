@@ -6,13 +6,17 @@ var fs = require("fs");
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
   // Ideal is the '_id' of user to whom i follow
   //   const ideals = req.user.ideals;
-  //   const posts = [];
+    // const posts = [];
   //   ideals.forEach(function(ideal) {
   //     Post.find({ userid: ideal }).then((post)=>console.log(post));
   //   });
-  res.render("dashboard", {
-    user: req.user
-  });
+  Post.find({}).then((posts)=>{
+    res.render("dashboard", {
+      user: req.user,
+      posts
+    });
+  })
+  
 });
 
 router.post("/post/create", ensureAuthenticated, (req, res) => {
@@ -41,5 +45,17 @@ router.post("/post/like", (req, res) => {});
 router.post("/post/comment", (req, res) => {});
 
 router.post("/post/delete", (req, res) => {});
+
+router.get("/post/liked",(req,res)=>{
+  var likedPostsId = req.user.likes;
+  var posts=[];
+  likedPostsId.forEach(function(postid){
+    Post.findById({_id:postid}).then((post)=>{
+      posts.push(post)
+    })
+  })
+  console.log(posts)
+  res.render('liked',{posts})
+})
 
 module.exports = router;

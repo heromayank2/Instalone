@@ -75,4 +75,11 @@ router.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
+router.post('/getname',(req,res)=>{
+    const {userid} = req.body;
+    User.findById({'_id':userid}).then((user)=>{
+        res.send(user.name)
+    })
+})
+
 module.exports = router;

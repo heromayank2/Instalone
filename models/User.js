@@ -24,6 +24,9 @@ var userSchema = new mongoose.Schema({
     },
     followers:{
         type:Array
+    },
+    likes:{
+        type:Array
     }
 });
 

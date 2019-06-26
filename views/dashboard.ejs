@@ -6,7 +6,7 @@
         <h4 class="modal-title w-100 font-weight-bold">Create a Post</h4>
       </div>
       <div class="modal-body mx-3">
-          <form action="/createpost" method="post">
+          <form action="/post/create" method="post">
             <div class="form-group">
               <h3 style="font-family: 'Lobster', cursive;">Post Caption</h3>
               <input type="text" name="caption" class="form-control" id="PostCaption" placeholder="Daddy's Lil Gal">
@@ -27,16 +27,16 @@
   </div>
 </div>
     <div class="row">
-        <div class="col-lg-3">
-           <h1 class="mt-4">Dashboard</h1>
-            <p class="lead mb-3">Welcome <%= user.name %></p>
-           <a href="/users/logout" class="btn btn-secondary">Logout</a>
+        <div class="col-lg-8 p-2">
+            <% if(posts){ posts.forEach(function(post){ %>
+                <div class="border p-2" style="margin-top:20px;border: 2px #E5E5E5 soild">
+                  <h4><%= post.caption %></h4>
+                </div>
+            <% })} %>
         </div>
-        <div class="col-lg-6">
-            Posts
-        </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <button class="btn btn-info mt-3" data-toggle="modal" data-target="#postForm" onclick="console.log('POST Button')">New Post</button>
+
         </div>
     </div>
 </div>
