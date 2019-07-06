@@ -4,12 +4,29 @@
         <div class="col-lg-3">
             <img style="border-radius:50%;border:3px solid #ffffff;width:200px;height:200px;" src="http://localhost:5000/Images/doctor1.jpg">
         </div>
-        <div class="col-lg-9 my-auto">
+        <div class="col-lg-6 my-auto">
             <h5 style="color:#ffffff;"><%= user.email %></h5>
             <br>
-            <h2 style="font-family: 'Dancing Script', cursive;color:#ffffff;"> 0 <%= posts.length %> posts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= user.ideals.length %> following &nbsp; &nbsp; &nbsp; &nbsp; <%= user.followers.length %> followers</h5>
+            <h2 style="font-family: 'Dancing Script', cursive;color:#ffffff;"> 0 posts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= user.ideals.length %> following &nbsp; &nbsp; &nbsp; &nbsp; <%= user.followers.length %> followers</h5>
             <br>
             <h2 style="font-family: 'Lobster', cursive;color:#ffffff"> <%= user.name %> </h2>
+        </div>
+        <div class="col-lg-3">
+        <% if(userissame==0){ %>
+            <% if(alreadyfollowing==false){ %>
+                <a href="/follow/<%= user._id %>">
+                    <button class="btn btn-success">
+                        Follow
+                    </button>
+                </a>
+            <% }else{ %>
+                <a href="/unfollow/<%= user._id %>">
+                    <button class="btn btn-info">
+                        Unfollow
+                    </button>
+                </a>
+            <% } %>
+        <% } %>
         </div>
     </div>
     <div class="row" style="margin-top:20px;border-top:2px solid #ffffff">

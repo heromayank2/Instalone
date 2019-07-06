@@ -30,7 +30,12 @@ router.get("/profile/:userid", ensureAuthenticated, (req, res) => {
       User.findById({ _id: req.params.userid }).then(user => {
         console.log("Here is the User ");
         console.log(user);
-        res.render("profile", { user ,userissame, posts});
+        var alreadyfollowing = false;
+        if(req.user.ideals.includes(req.params.userid)==true){
+          alreadyfollowing = true;
+        }
+        res.render("profile", { user ,userissame, posts,alreadyfollowing});
+        
       });
     } else {
       res.render("profile", {user:req.user,userissame,posts});
@@ -127,5 +132,56 @@ router.get("/post/liked", (req, res) => {
   console.log(posts);
   res.render("liked", { posts });
 });
+
+router.get('/follow/:userid',(req,res)=>{
+  User.findById({_id:req.user._id}).then(user=>{
+    var newuser = user;
+    newuser.ideals.push(req.params.userid);
+    User.findByIdAndUpdate({_id:req.user._id},newuser,{ new: true }, (err, user) => {
+      if (err) {
+        console.log("Something wrong when following the user!");
+      }
+      User.findById({_id:req.params.userid}).then(user=>{
+        var newuser2= user;
+        newuser2.followers.push(req.user._id);
+        User.findByIdAndUpdate({_id:req.params.userid},newuser2,{ new:true},(err,user)=>{
+          if(err){
+            console.log("Something Wrong Happened");
+          }
+          res.redirect("/profile/"+req.params.userid);
+        })
+      })
+    });
+  })  
+})
+
+router.get('/unfollow/:userid',(req,res)=>{
+  User.findById({_id:req.user._id}).then(user=>{
+    var newuser = user;
+    var index = newuser.ideals.indexOf(req.params.userid);
+    if (index > -1) {
+      newuser.ideals.splice(index, 1);
+    }
+    User.findByIdAndUpdate({_id:req.user._id},newuser,{ new: true }, (err, user) => {
+      if (err) {
+        console.log("Something wrong when following the user!");
+      }
+      // 
+      User.findById({_id:req.params.userid}).then(user=>{
+        var newuser2= user;
+        var secindex = newuser2.followers.indexOf(req.user._id);
+        if (secindex > -1) {
+          newuser2.followers.splice(secindex, 1);
+        }
+        User.findByIdAndUpdate({_id:req.params.userid},newuser2,{ new:true},(err,user)=>{
+          if(err){
+            console.log("Something Wrong Happened");
+          }
+          res.redirect("/profile/"+req.params.userid);
+        })
+      })
+    });
+  })  
+})
 
 module.exports = router;
