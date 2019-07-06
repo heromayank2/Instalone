@@ -1,6 +1,6 @@
 <%- include ./partials/header.ejs %> 
-<div class="container">
-    <h2><%= type %></h2>
+<div class="container p-2" >
+    <h2 style="font-family: 'Luckiest Guy', cursive; color:#ffffff"><%= type.toUpperCase() %></h2>
     <% if(type=='followers'){ %>
         <table class="table">
             <tbody>
@@ -9,9 +9,17 @@
                     <td><a href="/profile/<%= follower.id %>"><%= follower.name %></td>
                     <td><img src="http://localhost:5000/Images/doctor1.jpg" style="width:20px;height:20px;border-radius:50%;border:1px solid #ffffff"></td>
                 </tr>
-            <% } %>
+            <% }) %>
             </tbody>
         </table>
     <% } %>
-
+    <% if(type=='search'){ %>
+            <% list.forEach(function(user){ %>
+                <div>
+                <a href="/profile/<%= user.id %>"><%= user.name %>
+                <img src="http://localhost:5000/Images/doctor1.jpg" style="width:20px;height:20px;border-radius:50%;border:1px solid #ffffff"></div>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } %>
 </div>

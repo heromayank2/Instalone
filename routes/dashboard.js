@@ -184,4 +184,17 @@ router.get('/unfollow/:userid',(req,res)=>{
   })  
 })
 
+router.post('/profile/search',(req,res)=>{
+  const {search} = req.body;
+  User.find({}).then(users=>{
+    var userlist=[]
+    users.forEach(function(user){
+      if(user.name.toLowerCase().includes(search.toLowerCase())==true){
+        userlist.push(user)
+      }
+    })
+    res.render('list',{'type':'search','list':userlist,'user':req.user})
+  })
+ })
+
 module.exports = router;
