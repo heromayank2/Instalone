@@ -1,0 +1,24 @@
+<%- include ./partials/header.ejs %> 
+<div class="container p-2">
+    <div class="row p-2" style="margin-top:20px; ">
+        <div class="col-lg-3">
+            <img style="border-radius:50%;border:3px solid #ffffff;width:200px;height:200px;" src="http://localhost:5000/Images/doctor1.jpg">
+        </div>
+        <div class="col-lg-9 my-auto">
+            <h5 style="color:#ffffff;"><%= user.email %></h5>
+            <br>
+            <h2 style="font-family: 'Dancing Script', cursive;color:#ffffff;"> 0 <%= posts.length %> posts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= user.ideals.length %> following &nbsp; &nbsp; &nbsp; &nbsp; <%= user.followers.length %> followers</h5>
+            <br>
+            <h2 style="font-family: 'Lobster', cursive;color:#ffffff"> <%= user.name %> </h2>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;border-top:2px solid #ffffff">
+        <div class="row p-3">
+            <% %>
+            <% %>
+            <div class="col-lg-4 my-5">
+                <img style="width:300px;height:300px;" src="http://localhost:5000/Images/doctor1.jpg">
+            </div>
+        </div>
+    </div>
+</div>
