@@ -7,7 +7,7 @@
         <div class="col-lg-6 my-auto">
             <h5 style="color:#ffffff;"><%= user.email %></h5>
             <br>
-            <h2 style="font-family: 'Dancing Script', cursive;color:#ffffff;"> 0 posts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= user.ideals.length %> following &nbsp; &nbsp; &nbsp; &nbsp; <%= user.followers.length %> followers</h5>
+            <h2 style="font-family: 'Dancing Script', cursive;color:#ffffff;"> 0 posts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="/ideals/<%= user._id %>"> <%= user.ideals.length %> following</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="/followers/<%= user._id %>" <%= user.followers.length %> followers</a></h5>
             <br>
             <h2 style="font-family: 'Lobster', cursive;color:#ffffff"> <%= user.name %> </h2>
         </div>
