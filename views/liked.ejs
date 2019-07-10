@@ -1,1 +1,20 @@
-<%= posts %>
+Hello World
+<% console.log("Check 1 2 3"+posts+"Check 4 5 6") %>
+ <% if(posts){ posts.forEach(function(post){ %>
+    <div class="border p-2" style="margin-top:20px;border: 2px #E5E5E5 soild;background:#f3f3f3;border-radius:5px">
+        <h6 style="font-family: 'Lobster', cursive;"><%= post.userid %></h6>
+        <img src="data:<%= post.image.contentType %>;base64,<%= post.image.data %>" style="max-width: 100%;">
+        <p  style="color:#EB6864"><%=post.likes.length%> likes <%=post.comments.length%> comments</p>
+        <p style="font-family: 'Lobster', cursive;"><%= post.caption %></p>
+        <form action="/post/comment/<%=post._id%>" method="post" style="padding:5px">
+        <span>
+        Hello World
+        <a href="/post/like/"><i class="fas fa-heart fa-2x" style="color:#EB6864"></i></a>
+        </span>
+        <span>                 
+        <input type="text" name="comment" style="height:30px;width:350px;border-radius:5px; border:2px solid #EB6864;padding:5px;color:#Eb6864;" placeholder="Add Comment">
+        <button style="background:#ffffff00;border:0px" type="submit"><i class="fas fa-paper-plane fa-2x" style="color:#Eb6864"></i></button>
+        </span>
+        </form>
+    </div>
+<% })} %> 

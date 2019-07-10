@@ -4,23 +4,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Create a Post</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Make a Wish? or Post</h4>
       </div>
       <div class="modal-body mx-3">
-          <form action="/post/create" method="post">
+          <form action="/post/create" enctype="multipart/form-data" method="post">
             <div class="form-group">
-              <h3 style="font-family: 'Lobster', cursive;">Post Caption</h3>
-              <input type="text" name="caption" class="form-control" id="PostCaption" placeholder="Daddy's Lil Gal">
+              <h3 style="font-family: 'DM Serif Display', serif;">Caption</h3>
+              <input type="text" name="caption" class="form-control" id="PostCaption" placeholder="Made by Mayank Goyal">
             </div>
-            <h3 style="font-family: 'Lobster', cursive;">Post Image</h3>
-            <div class="input-group mb-3">
-            
-            <div class="custom-file">
-             
-              <input type="file" name="image" accept=".png, .jpg, .jpeg" class="custom-file-input" id="inputGroupFile01" >
-               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-            </div>
-          </div>
+            <h3 style="font-family: 'DM Serif Display', serif;">Select Image</h3>
+            <input type="file" name="image" id="inputGroupFile01" > 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
       </div>

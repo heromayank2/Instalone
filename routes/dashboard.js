@@ -4,6 +4,19 @@ const { ensureAuthenticated } = require("../config/auth");
 const Post = require("../models/Post");
 const User = require("../models/User");
 var fs = require("fs");
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './assets/images/uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+});
+
+var upload = multer({storage: storage});
+
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
   // Ideal is the '_id' of user to whom i follow
   //   const ideals = req.user.ideals;
@@ -23,18 +36,15 @@ router.get("/profile/:userid", ensureAuthenticated, (req, res) => {
   if (req.params.userid == req.user._id) {
     userissame = 1;
   }
+  console.log("Here is the user "+req.user)
   Post.findOne({ userid: req.params.userid }).then(posts => {
-    console.log("Here are the posts");
-    console.log(posts);
     if (!userissame) {
       User.findById({ _id: req.params.userid }).then(user => {
-        console.log("Here is the User ");
-        console.log(user);
         var alreadyfollowing = false;
         if(req.user.ideals.includes(req.params.userid)==true){
           alreadyfollowing = true;
         }
-        res.render("profile", { user ,userissame, posts,alreadyfollowing});
+        res.render("otherprofile", { user:req.user ,otheruser:user,userissame, posts, alreadyfollowing});
         
       });
     } else {
@@ -44,24 +54,28 @@ router.get("/profile/:userid", ensureAuthenticated, (req, res) => {
   
 });
 
-router.post("/post/create", ensureAuthenticated, (req, res) => {
+router.post("/post/create", upload.single('image') ,ensureAuthenticated, (req, res) => {
   const { caption, image } = req.body;
-  console.log(image);
-  var newPost = new Post();
-  newPost.caption = caption;
-  newPost.image.data = fs.readFileSync(image);
-  newPost.image.contentType =
-    "image/" + image.slice(image.length - 3, image.length);
-  newPost.userid = req.user._id;
-  console.log(newPost);
-  newPost
-    .save()
-    .then(post => {
-      console.log("New Post Added");
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  // console.log(image);
+  console.log("Here here "+req.file.path)
+  // var imgpath = fs.readFileSync(;
+  // console.log("Here here here"+ req.file.filename);
+  
+  // var newPost = new Post();
+  // newPost.caption = caption;
+  // newPost.image.data = fs.readFileSync(image);
+  // newPost.image.contentType =
+  //   "image/" + image.slice(image.length - 3, image.length);
+  // newPost.userid = req.user._id;
+  // console.log(newPost);
+  // newPost
+  //   .save()
+  //   .then(post => {
+  //     console.log("New Post Added");
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
   res.redirect("/dashboard");
 });
 
@@ -129,8 +143,8 @@ router.get("/post/liked", (req, res) => {
       posts.push(post);
     });
   });
-  console.log(posts);
-  res.render("liked", { posts });
+  console.log("Here are the posts " + posts);
+  res.render("liked", { "posts":posts });
 });
 
 router.get('/follow/:userid',(req,res)=>{

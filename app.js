@@ -4,6 +4,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const BodyParser = require('body-parser')
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +25,7 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
+app.use(BodyParser.json());
 
 // EJS
 app.use(expressLayouts)

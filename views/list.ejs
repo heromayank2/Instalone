@@ -1,13 +1,13 @@
 <%- include ./partials/header.ejs %> 
 <div class="container p-2" >
-    <h2 style="font-family: 'Luckiest Guy', cursive; color:#ffffff"><%= type.toUpperCase() %></h2>
+    <h2 class="my-3" style="font-family: 'Permanent Marker', cursive; color:#ffffff"><%= type.toUpperCase() %> Results</h2>
     <% if(type=='followers'){ %>
         <table class="table">
             <tbody>
             <% list.forEach(function(follower){ %>
                 <tr>
                     <td><a href="/profile/<%= follower.id %>"><%= follower.name %></td>
-                    <td><img src="http://localhost:5000/Images/doctor1.jpg" style="width:20px;height:20px;border-radius:50%;border:1px solid #ffffff"></td>
+                    <td><img src="http://localhost:5000/Images/doctor1.jpg" style="width:30px;height:30px;border-radius:50%;border:1px solid #ffffff"></td>
                 </tr>
             <% }) %>
             </tbody>
@@ -15,11 +15,9 @@
     <% } %>
     <% if(type=='search'){ %>
             <% list.forEach(function(user){ %>
-                <div>
-                <a href="/profile/<%= user.id %>"><%= user.name %>
-                <img src="http://localhost:5000/Images/doctor1.jpg" style="width:20px;height:20px;border-radius:50%;border:1px solid #ffffff"></div>
+                <div class="alert col-lg-4" role="alert" style="background:#ffffff55">
+                    <a href="/profile/<%= user.id %>" class="alert-link" style="text-decoration:none;"><%= user.name %></a> <img src="http://localhost:5000/Images/doctor1.jpg" style="width:30px;height:30px;border-radius:50%;border:1px solid #ffffff;float:right;">
+                </div>
             <% }) %>
-            </tbody>
-        </table>
     <% } %>
 </div>
